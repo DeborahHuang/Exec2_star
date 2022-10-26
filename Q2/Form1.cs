@@ -15,6 +15,7 @@ namespace Q2
 		public Form1()
 		{
 			InitializeComponent();
+			label1.Text = string.Empty;
 		}
 
 		private void btnGreeting_Click(object sender, EventArgs e)
