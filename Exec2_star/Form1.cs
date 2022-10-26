@@ -32,21 +32,11 @@ namespace Exec2_star
 			string stars = GenerateStars(rows);
 
 			//呈現結果
-			stars = txtGenerateStar.Text;
-		}
-
-		private string GenerateStars(int rows)
-		{
-			string result=string.Empty;
-			for (int i = 1; i <= rows; i++)
-			{
-				result+=new string('*',i)+"\r\n";
-			}
-			return result;
+			txtGenerateStar.Text= stars;
 		}
 
 		private int GetInt()
-		{//判斷rows是否為整數,不能小於零、大於10
+		{
 			string input= txtInsertLine.Text;
 			bool Isint = int.TryParse(input, out int rows);
 			if (Isint == false)throw new Exception("請輸入列數");
@@ -54,7 +44,42 @@ namespace Exec2_star
 			return rows;
 		}
 
+		private string GenerateStars(int rows)
+		{
+			string result = string.Empty;
+			for (int i = 1; i <= rows; i++)
+			{
+				result += new string('＊', i) + "\r\n";
+			}
+			return result;
+		}
+
 		private void btnRight_Click(object sender, EventArgs e)
+		{
+			int rows=0;
+			try
+			{
+				rows = GetInt();
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message);
+			}
+			string stars = GenerateStarsRight(rows);
+			txtGenerateStar.Text= stars;
+		}
+
+		private string GenerateStarsRight(int rows)
+		{
+			string result = string.Empty;
+			for (int i = 1; i <=rows; i++)
+			{
+				result+= new string('　', rows - i)+new string('＊', i) + "\r\n";
+			}
+			return result;
+		}
+
+		private void btnMiddle_Click(object sender, EventArgs e)
 		{
 			int rows = 0;
 			try
@@ -65,24 +90,18 @@ namespace Exec2_star
 			{
 				MessageBox.Show(ex.Message);
 			}
-			string stars = GenerateStarRight(rows);
-			txtGenerateStar.Text= stars;
+			string stars = GenerateStarsMiddle(rows);
+			txtGenerateStar.Text = stars;
 		}
 
-		private string GenerateStarRight(int rows)
+		private string GenerateStarsMiddle(int rows)
 		{
 			string result = string.Empty;
-			for (int i = 1; i < rows; i++)
+			for (int i = 1; i <= rows; i++)
 			{
-				result += new string(' ',rows-i).PadLeft(rows+i-1,' ') + "\r\n";
+				result += new string('　', rows -i) + new string('＊', i*2-1) +new string('　', rows -i) + "\r\n";
 			}
 			return result;
 		}
-
-		private void btnMiddle_Click(object sender, EventArgs e)
-		{
-
-		}
-
 	}
 }
